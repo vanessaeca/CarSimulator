@@ -4,8 +4,8 @@ public class RoadMap {
 
     int x, y;
 
-    private List<Coords> startingPoints = new ArrayList<Coords>();
-    private Coords carStartingPoint = new Coords();
+    /*private List<Coords> startingPoints = new ArrayList<Coords>();
+    private Coords carStartingPoint = new Coords();*/
 
     private char[][] road= {{'#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#'},
                             {' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},
@@ -28,29 +28,29 @@ public class RoadMap {
         int count = 0;
         int a,b;
         while(count<2){
-            a = Math.floor(Math.random() * 15);
-            b = Math.floor(Math.random() * 35);
-            if(road[a][b] = ' '){
-                road[a][b] = 'C'; //Cone
+            a = (int) Math.floor(Math.random() * 15);
+            b = (int) Math.floor(Math.random() * 35);
+            if(road[a][b] == ' '){
+                road[a][b] = 'C';
             count++;
             }
         }
         count = 0;
         while(count<1){
-            a = Math.floor(Math.random() * 15);
-            b = Math.floor(Math.random() * 35);
-            if(road[a][b] = '#'){
-                road[a][b] = 'P'; //Parking Sign
+            a = (int) Math.floor(Math.random() * 15);
+            b = (int) Math.floor(Math.random() * 35);
+            if(road[a][b] == '#'){
+                road[a][b] = 'P';
             count++;
             }
         }
     
         count = 0;
         while(count<1){
-            a = Math.floor(Math.random() * 15);
-            b = Math.floor(Math.random() * 35);
-            if(road[a][b] = '#'){
-                road[a][b] = 'R'; //Red Light
+            a = (int) Math.floor(Math.random() * 15);
+            b = (int) Math.floor(Math.random() * 35);
+            if(road[a][b] == '#'){
+                road[a][b] = 'R';
             count++;
             }
         }
@@ -69,4 +69,7 @@ public class RoadMap {
         return road;
   } 
     
+    public RoadMap(){
+        setObstacle();
+    }
 }
