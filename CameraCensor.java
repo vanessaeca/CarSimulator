@@ -12,7 +12,8 @@ private float maxRange;
 public boolean isVertical;
 public RoadMap map;
 public char direction;
-
+public static final int censorRange = 3;
+	
 public CameraCensor(char direction){
 map = new RoadMap();
 this.direction = direction ;
@@ -21,115 +22,41 @@ this.direction = direction ;
 /*public void readMap(RoadMap road[][]) {
 }
 */
-
 public HashMap<Coords, Character> findObstacles(int x, int y){
-	char[][] road = map.getRoad();
-	HashMap<Coords, Character> obstacles = new HashMap<Coords, Character>();
-	if(direction == 'e') {
-		if(x == 1) {
-			for(int i = x; i<x+5; i++) {
-				for(int j = y; j < y+5; j++) {
+		char[][] road = map.getRoad();
+		HashMap<Coords, Character> obstacles = new HashMap<Coords, Character>();
+		if(direction == 'e') {
+			//alur iterasinya, untuk setiap kolom, akan di cek setiap barisnya
+			for(int j = y; j<=y+censorRange; j++) {
+				for(int i = x-censorRange; i <= x+censorRange; i++) {
+					//if out of bound (top row), then next iteration
+					if(i < 0)
+						continue;
+					//if out of bound (column), then break (do not need to check next column)
+					if(j > RoadMap.MAP_WIDTH)
+						break;
 					if(road[i][j] != ' ' && road[i][j] != '.') {
 						obstacles.put(new Coords(i,j), road[i][j]);
 					}
 				}
 			}
 		}
-		else if(x == 2) {
-			for (int i = x-1; i<x+5; i++) {
-				for(int j = y; j < y+5; j++) {
+		else if( direction == 's') {
+			//alur iterasinya, untuk setiap baris, akan dicek setiap kolomnya
+			for(int i = x; i < x+censorRange; i++) {
+				for(int j = y-censorRange; j<= y+censorRange; y++) {
+					// if out of bound (bottom row), then next iteration
+					if(i>=RoadMap.MAP_HEIGHT)
+						break;
 					if(road[i][j] != ' ' && road[i][j] != '.') {
 						obstacles.put(new Coords(i,j), road[i][j]);
 					}
 				}
 			}
 		}
-		else if(x == 3) {
-			for (int i = x-2; i <x+5; i++) {
-				for(int j = y; j < y+5; j++) {
-					if(road[i][j] != ' ' && road[i][j] != '.') {
-						obstacles.put(new Coords(i,j), road[i][j]);
-					}
-				}
-			}
-		}
-		else if(x == 4) {
-			for(int i = x - 3; i < x+5; i++) {
-				for(int j = y; j < y+5; j++) {
-					if(road[i][j] != ' ' && road[i][j] != '.') {
-						obstacles.put(new Coords(i,j), road[i][j]);
-					}
-				}
-			}
-		}
-		else if(x >= 5) {
-			for(int i = x-4; i<x+5; i++) {
-				for(int j = y; j < y+5; j++) {
-					if(road[i][j] != ' ' && road[i][j] != '.') {
-						obstacles.put(new Coords(i,j), road[i][j]);
-					}
-				}
-			}
-		}
+		return obstacles;
 	}
-	else if( direction == 's') {
-		if(x <16) {
-			for(int i = x+1; i < x+5; i++) {
-				for(int j = y-5; y< y+5; y++) {
-					if(road[i][j] != ' ' && road[i][j] != '.') {
-						obstacles.put(new Coords(i,j), road[i][j]);
-					}
-				}
-			}
-		}
-		else if(x == 16) {
-			for(int i = x+1; i < x+4; i++) {
-				for(int j = y-5; y< y+5; y++) {
-					if(road[i][j] != ' ' && road[i][j] != '.') {
-						obstacles.put(new Coords(i,j), road[i][j]);
-					}
-				}
-			}
-		}
-		else if(x == 17) {
-			for(int i = x+1; i < x+3; i++) {
-				for(int j = y-5; y< y+5; y++) {
-					if(road[i][j] != ' ' && road[i][j] != '.') {
-						obstacles.put(new Coords(i,j), road[i][j]);
-					}
-				}
-			}
-		}
-		else if(x == 18) {
-			for(int i = x+1; i < x+2; i++) {
-				for(int j = y-5; y< y+4; y++) {
-					if(road[i][j] != ' ' && road[i][j] != '.') {
-						obstacles.put(new Coords(i,j), road[i][j]);
-					}
-				}
-			}
-		}
-		else if(x == 19) {
-			for(int i = x+1; i < x+1; i++) {
-				for(int j = y-5; y< y+4; y++) {
-					if(road[i][j] != ' ' && road[i][j] != '.') {
-						obstacles.put(new Coords(i,j), road[i][j]);
-					}
-				}
-			}
-		}
-		else if(x == 20) {
-			
-				for(int j = y-5; y< y+4; y++) {
-					if(road[x][j] != ' ' && road[x][j] != '.') {
-						obstacles.put(new Coords(x,j), road[x][j]);
-					}
-				}
-			
-		}
-	}
-	return obstacles;
-}
+
 
 /*public HashMap<Coords, Character> findObstacles(int x, int y){
 char[][] road = map.getRoad();
