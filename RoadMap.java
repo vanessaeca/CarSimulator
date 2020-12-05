@@ -3,6 +3,8 @@ import java.util.*;
 public class RoadMap {
 
     int x, y;
+    public static final int MAP_WIDTH = 35;
+    public static final int MAP_HEIGHT = 15;
 
     /*private List<Coords> startingPoints = new ArrayList<Coords>();
     private Coords carStartingPoint = new Coords();*/
