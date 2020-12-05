@@ -27,11 +27,17 @@ public class RoadMap {
     public void setObstacle(){
         int count = 0;
         int a,b;
+        String cone = "\uD83D\uDEA7";
+        int coneCodePoint = cone.codePointAt(cone.offsetByCodePoints(0,0));
+        int mysteryConeCodePoint = coneCodePoint + 1;
+
+        char mysteryCone[] = {Character.highSurrogate(mysteryConeCodePoint), Character.lowSurrogate(mysteryConeCodePoint)};
+        
         while(count<2){
             a = (int) Math.floor(Math.random() * 15);
             b = (int) Math.floor(Math.random() * 35);
             if(road[a][b] == ' '){
-                road[a][b] = 'C';
+                System.out.println(mysteryCone);
             count++;
             }
         }
